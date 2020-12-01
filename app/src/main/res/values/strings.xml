@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">SDA Assign3 2020 Gerard Cahill</string>
+    <string-array name="ui_time_entries">
+        <item>" 2"</item>
+        <item>" 3"</item>
+        <item>" 4"</item>
+        <item>" 5"</item>
+        <item>10</item>
+        <item>14</item>
+    </string-array>
+
+    <string name="images_desc">Flavors Images</string>
+    <string name="plc_version">version</string>
+    <string name="plc_flavor">flavor</string>
+    <string name="placeholder">Order T shirt</string>
+
+    <string name="customer_name">Name</string>
+    <string name="order_message_1">Please find my order attached</string>
+    <string name="order_message_collect">I will collect it in&#160;</string>
+    <string name="order_message_end">Regards</string>
+    <string name="notification_title">Notification!</string>
+    <string name="to_email">my-tshirt@sda.ie</string>
+    <string name="email_subject">Order Request </string>
+    <string name="border">border</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gers_sports_merchandise">Gers_Sports_Merchandise</string>
+    <string name="your_one_stop_shop_for_sports_mechandise">Your_one_stop_shop_for_sports_mechandise</string>
+    <string name="welcome_to">Welcome_to</string>
+    <string name="hurling">Hurling</string>
+    <string name="rugby">Rugby</string>
+    <string name="soccer">Soccer</string>
+    <string name="send_order">SEND ORDER</string>
+    <string name="enter_your_delivery_address">Enter Your Delivery Address</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="take_photo_for_t_shirt">Take photo for T-Shirt</string>
+    <string name="or_for_collection_in_days">Or - for Collection in (days)</string>
+    <string name="delivery">Delivery</string>
+    <string name="collection">Collection</string>
+    <string name="todo">TODO</string>
+    <string name="collection_text">collection_text</string>
+    <string name="enter_your_address">Enter Your Address</string>
+    <string name="your_one_stop_shop_for_sports_jerseys">your one stop shop for sports Jerseys</string>
+    <string name="sports_jersey_direct">Sports Jersey Direct</string>
+    <string name="welcome_to_gers">welcome to Gers</string>
+
+
+</resources>
