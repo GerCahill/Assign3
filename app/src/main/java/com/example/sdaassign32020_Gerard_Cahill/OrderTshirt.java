@@ -62,10 +62,34 @@ public class OrderTshirt extends Fragment {
         meditDelivery = root.findViewById(R.id.editDeliver);
         meditDelivery.setImeOptions(EditorInfo.IME_ACTION_DONE);
         meditDelivery.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
         radioGroup = root.findViewById(R.id.radioGroup);
         delivery = root.findViewById(R.id.deliveryButton);
         collection = root.findViewById(R.id.collectionButton);
         mEditCollection = root.findViewById(R.id.editCollect);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i){
+                    //collection button selected
+                    case R.id.collectionButton:
+                        mEditCollection.setVisibility(View.VISIBLE);
+                        meditDelivery.setVisibility(View.INVISIBLE);
+                        mSpinner.setVisibility(View.VISIBLE);
+                        setCollectionMessage = true;
+                        setDeliveryMessage = false;
+                        break;
+                    //delivery button selected
+                    case R.id.deliveryButton:
+                        meditDelivery.setVisibility(View.VISIBLE);
+                        mEditCollection.setVisibility(View.INVISIBLE);
+                        mSpinner.setVisibility(View.INVISIBLE);
+                        setDeliveryMessage = true;
+                        setCollectionMessage = false;
+                }
+            }
+        });
 
         mCameraImage = root.findViewById(R.id.imageView);;
         Button mSendButton = root.findViewById(R.id.sendButton);
@@ -99,25 +123,8 @@ public class OrderTshirt extends Fragment {
 
     //set a listener on radio buttons to execute code based on radio selection
         //radioGroup.setOnCheckListener(new RadioGroup.OnCheckedChangeListener() {
-        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-            switch(i){
-                //collection button selected
-                case R.id.collectionButton:
-                    mEditCollection.setVisibility(View.VISIBLE);
-                    meditDelivery.setVisibility(View.INVISIBLE);
-                    mSpinner.setVisibility(View.VISIBLE);
-                    setCollectionMessage = true;
-                    setDeliveryMessage = false;
-                    break;
-                //delivery button selected
-                case R.id.deliveryButton:
-                    meditDelivery.setVisibility(View.VISIBLE);
-                    mEditCollection.setVisibility(View.INVISIBLE);
-                    mSpinner.setVisibility(View.INVISIBLE);
-                    setDeliveryMessage = true;
-                    setCollectionMessage = false;
-            }
-        }
+        //public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
 
 
     //Take a photo note the view is being passed so we can get context because it is a fragment.

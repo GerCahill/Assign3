@@ -38,7 +38,7 @@
             android:inputType="textMultiLine"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -110,7 +110,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:gravity="end"
-            android:text="@string/collection_text"
+            android:text="Select Collection in (days) "
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:visibility="invisible"

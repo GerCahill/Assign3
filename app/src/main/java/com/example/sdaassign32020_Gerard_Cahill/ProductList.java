@@ -49,7 +49,7 @@ public class ProductList extends Fragment {
         mFlavor.add(new FlavorAdapter("Dublin", "S, M, L, XL", R.drawable.dublin));
         mFlavor.add(new FlavorAdapter("Carlow", "S, M, L, XL", R.drawable.carlow));
         mFlavor.add(new FlavorAdapter("Cork", "S, M, L, XL",R.drawable.cork));
-        mFlavor.add(new FlavorAdapter("Tipp", "S, M, L, XL",R.drawable.tipp));
+        mFlavor.add(new FlavorAdapter("Tipperary", "S, M, L, XL",R.drawable.tipp));
         mFlavor.add(new FlavorAdapter("Kilkenny", "S, M, L, XL", R.drawable.kilkenny));
 
         //start it with the view
