@@ -26,7 +26,7 @@ public class FlavorAdapter {
     // Name of the design name (e.g. Liverpool, Ireland, Dublin)
     private String designName;
 
-    // product size (e.g. s, m, l, xl)
+    // Jersey design size (e.g. s, m, l, xl)
     private String designSize;
 
     // Drawable resource ID
@@ -55,7 +55,7 @@ public class FlavorAdapter {
     }
 
     /**
-     * Get the product size
+     * Get the Jersey size
      */
     public String getDesignSize() {
         return designSize;
