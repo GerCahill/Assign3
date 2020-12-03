@@ -110,7 +110,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:gravity="end"
-            android:text="Select Collection in (days) "
+            android:text="@string/select_collection_in_days"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:visibility="invisible"
