@@ -79,12 +79,19 @@ public class OrderTshirt extends Fragment {
         meditDelivery = root.findViewById(R.id.editDeliver);
         meditDelivery.setImeOptions(EditorInfo.IME_ACTION_DONE);
         meditDelivery.setRawInputType(InputType.TYPE_CLASS_TEXT);
-
+       // Button mSendButton = root.findViewById(R.id.sendButton);
         radioGroup = root.findViewById(R.id.radioGroup);
         delivery = root.findViewById(R.id.deliveryButton);
         collection = root.findViewById(R.id.collectionButton);
         mEditCollection = root.findViewById(R.id.editCollect);
+       // mSpinner = root.findViewById(R.id.spinner);
 
+
+        /**
+         * radiogGroup oncheckedChange() was adapted from the information found here:
+         *https://stackoverflow.com/questions/9748070/radio-group-onclick-event-not-firing-how-do-i-tell-which-is-selected
+         */
+        //set a listener on radio buttons to execute code based on radio selection
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -113,6 +120,9 @@ public class OrderTshirt extends Fragment {
 
         //set a listener on the the camera image
         mCameraImage.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();
@@ -138,15 +148,13 @@ public class OrderTshirt extends Fragment {
         return root;
     }
 
-    //set a listener on radio buttons to execute code based on radio selection
-        //radioGroup.setOnCheckListener(new RadioGroup.OnCheckedChangeListener() {
-        //public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
 
 
 
 //Image Begin
 
-    //dispatchTakePictureIntent starts the camera and creates a file where the image can be saved upon taking the photo
+    //The dispatchTakePictureIntent starts the camera and creates a file where the image can be saved upon taking the photo
     //update this to save the image so it can be sent via email
     private void dispatchTakePictureIntent() {
         //updated: added save photo functionality and test to make sure camera activity there to handle the intent
@@ -346,7 +354,7 @@ public class OrderTshirt extends Fragment {
             email.putExtra(Intent.EXTRA_EMAIL, new String[]{"SportsJerseysDirect@ie"});
             email.putExtra(Intent.EXTRA_SUBJECT, "Order Request");
             email.putExtra(Intent.EXTRA_TEXT, createOrderSummary(v));
-           // email.putExtra(Intent.EXTRA_STREAM, imageUri);
+            email.putExtra(Intent.EXTRA_STREAM, imageUri);
 
             Log.d(TAG, "sendEmail: should be sending an email with "+ createOrderSummary(v));
             email.setType("message/rfc822");
