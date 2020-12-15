@@ -85,14 +85,21 @@ public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.Vi
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             //grab the image, the text and the layout id's
             imageItem = itemView.findViewById(R.id.imageItem);
             designText = itemView.findViewById(R.id.flavorText);
             sizeText = itemView.findViewById(R.id.flavorVers);
-            //productText = itemView.findViewById(R.id.flavorVers);
             itemParentLayout = itemView.findViewById(R.id.listItemLayout);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        Log.d(TAG, "Recycler View Click" + position);
+                        Toast.makeText(mNewContext, "Jersey Selected " + mFlavors.get(position).getDesignName(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 }

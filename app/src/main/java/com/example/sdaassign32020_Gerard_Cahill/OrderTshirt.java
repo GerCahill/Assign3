@@ -125,7 +125,7 @@ public class OrderTshirt extends Fragment {
 
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent();
+                dispatchTakePictureIntent(v);
             }
         });
 
@@ -151,155 +151,17 @@ public class OrderTshirt extends Fragment {
 
 
 
-
-//Image Begin
-
-    //The dispatchTakePictureIntent starts the camera and creates a file where the image can be saved upon taking the photo
+//Take a photo note the view is being passed so we can get context because it is a fragment.
     //update this to save the image so it can be sent via email
-    private void dispatchTakePictureIntent() {
-        //updated: added save photo functionality and test to make sure camera activity there to handle the intent
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createMediaFile(REQUEST_TAKE_PHOTO);
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                Log.e(TAG, "dispatchTakePictureIntent: Could not create Image file: " + ex);
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getActivity(),
-                        "com.example.sdaassign32019johndoe.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-            }
-        }
-    }
-
-
-    /***
-     *  <p>method to create a time stamped picture file called by the dispatchTakePictureIntent methods </p> <br>
-     *  Adapted from https://developer.android.com/training/camera/photobasics
-     */
-    String currentPhotoPath;
-    private File createMediaFile(int requestCode) throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        if(requestCode == REQUEST_TAKE_PHOTO){
-            String imageFileName = "JPEG_" + timeStamp + "_";
-            String exState = Environment.getExternalStorageState();
-            if(exState.equals(Environment.MEDIA_MOUNTED)){
-                File storageDir = getActivity().getExternalFilesDir(DIRECTORY_PICTURES);
-                image = File.createTempFile(
-                        imageFileName,      /* prefix */
-                        ".jpg",        /* suffix */
-                        storageDir           /* directory */
-                );
-            } else {
-                Log.e(TAG, "createImageFile: External Storage is not available");
-            }
-            currentPhotoPath = image.getAbsolutePath();
-            Log.i(TAG, "createImageFile: "+ currentPhotoPath);
-        }
-        return image;
-    }
-
-    /**
-     * <p>the galleryAddPic method adds the photo to the gallery and makes it available to the user immediately</p> <br>
-     * following code was adapted from: https://developer.android.com/training/camera/photobasics
-     *
-     */
-    public void galleryAddPic()
+    private void dispatchTakePictureIntent(View v)
     {
-        // Tell the media scanner about the new file so that it is
-        // immediately available to the user.
-        MediaScannerConnection.scanFile(getActivity(),
-                new String[] { image.toString() }, null,
-                new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        Log.i("ExternalStorage", "Scanned " + path + ":");
-                        Log.i("ExternalStorage", "-> uri=" + uri);
-                        imageUri = uri;
-                    }
-                });
-    }
-
-    /**
-     * <p>@param path is passed to this method with a string object of the absolute path of the image file created. <br>
-     *      * The purpose of this method is to get the dimensions of the imageView and make sure the image taken will fit inside of it
-     *      </p><br>
-     * <p>this setPic method was adapted from the following:
-     *          <span margin-left: 40px;>- MediaIntentActivity project from the SDA-2019 folder downloaded from github</span><br>
-     *          <span margin-left: 40px;>- Android documentation: https://developer.android.com/training/camera/photobasics</span><br>
-     *          </p>
-     */
-    //formats image to fit in the imageview
-    private void setPic(String path) {
-
-        // Get the dimensions of the View
-        int targetW = mCameraImage.getWidth();
-        int targetH = mCameraImage.getHeight();
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-
-        // Get the dimensions of the image
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        int scaleFactor = 1;
-        // Determine how much to scale down the image
-        if(targetW > 0 || targetH > 0)
-        {
-            scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-        }else
-        {
-            Log.e(TAG, "setPic: scaleFactor is 1 continuing ...");
-        }
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-
-        Bitmap mBitMap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
-        mCameraImage.setImageBitmap(mBitMap);
-
-    }
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(v.getContext().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
 
 
-    /**
-     * <p>onActivityResult method returns the image taken by the camera. It also executes the galleryAddPic(),
-     * setPic() method, and sets the image in the imageView replacing the default image </p>
-     * <p>The code used in this onActivityResult method was adapted from a few sources including: <br>
-     *              <span margin-left: 40px;>- MediaIntentActivity project from the SDA-2019 folder downloaded from github</span><br>
-     *              <span margin-left: 40px;>- Android Documentation: https://developer.android.com/training/camera/photobasics</span><br>
-     * </p>
-     */
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_TAKE_PHOTO){
-            if (resultCode == RESULT_OK) {
-                //add image to gallery
-                galleryAddPic();
-                //fit the returned image into the imageview
-                setPic(currentPhotoPath);
-                //crates a bitmap from the path of the returned image
-                Bitmap bp = BitmapFactory.decodeFile(currentPhotoPath);
-                //sets the bitmap int the imageview
-                mCameraImage.setImageBitmap(bp);
-            }
-        } else if(resultCode == RESULT_CANCELED){
-            Toast.makeText(getActivity(), "picture capture fail", Toast.LENGTH_LONG).show();
         }
     }
-
-// Image end
 
 
     /**
