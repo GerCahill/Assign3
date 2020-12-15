@@ -88,7 +88,7 @@ public class OrderTshirt extends Fragment {
 
 
         /**
-         * radiogGroup oncheckedChange() was adapted from the information found here:
+         * radiogGroup oncheckedChange() was adapted from the information found on the webpage:
          *https://stackoverflow.com/questions/9748070/radio-group-onclick-event-not-firing-how-do-i-tell-which-is-selected
          */
         //set a listener on radio buttons to execute code based on radio selection
@@ -208,7 +208,7 @@ public class OrderTshirt extends Fragment {
             Toast.makeText(getContext(),"Please enter your address", Toast.LENGTH_SHORT).show();
         } else {
             /***
-             * The following code was adapted from here:
+             * The following code was adapted from the following webpage:
              * https://www.javatpoint.com/how-to-send-email-in-android-using-intent
              */
             //opens email an populates email with data collected in t-shirt order fragment

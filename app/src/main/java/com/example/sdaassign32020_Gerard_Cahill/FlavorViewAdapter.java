@@ -64,7 +64,7 @@ public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.Vi
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "onClick: this was clicked");
-                Toast.makeText(mNewContext, mFlavors.get(position).getDesignName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mNewContext, mFlavors.get(position).getDesignName() + " jersey selected", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -90,16 +90,7 @@ public class FlavorViewAdapter extends RecyclerView.Adapter<FlavorViewAdapter.Vi
             designText = itemView.findViewById(R.id.flavorText);
             sizeText = itemView.findViewById(R.id.flavorVers);
             itemParentLayout = itemView.findViewById(R.id.listItemLayout);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if(position != RecyclerView.NO_POSITION){
-                        Log.d(TAG, "Recycler View Click" + position);
-                        Toast.makeText(mNewContext, "Jersey Selected " + mFlavors.get(position).getDesignName(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+
         }
     }
 }
